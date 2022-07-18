@@ -33,4 +33,11 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public LoginHistoryDto getLatestLoginHistory(String userId) {
+        return loginHistoryRepository.findTopByUserIdOrderByLoginDtDesc(userId)
+                .map(LoginHistoryDto::of)
+                .orElse(null);
+    }
+
 }

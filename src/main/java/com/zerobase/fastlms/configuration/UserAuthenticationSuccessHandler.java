@@ -22,7 +22,6 @@ public class UserAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        System.out.println("로그인 성공해쪄염");
         System.out.println(request.getHeader("user-agent"));
         System.out.println(ClientUtil.getIp(request));
         System.out.println(request.getParameter("username"));

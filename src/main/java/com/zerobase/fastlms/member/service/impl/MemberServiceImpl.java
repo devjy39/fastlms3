@@ -119,6 +119,10 @@ public class MemberServiceImpl implements MemberService {
         if (!CollectionUtils.isEmpty(list)) {
             int i = 0;
             for(MemberDto x : list) {
+                LoginHistoryDto latestLoginHistory = loginHistoryService.getLatestLoginHistory(x.getUserId());
+                if (latestLoginHistory != null) {
+                    x.setLastLoginDt(latestLoginHistory.getLoginDt());
+                }
                 x.setTotalCount(totalCount);
                 x.setSeq(totalCount - parameter.getPageStart() - i);
                 i++;

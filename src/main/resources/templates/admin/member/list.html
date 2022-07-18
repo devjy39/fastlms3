@@ -28,10 +28,6 @@
             margin-top: 20px;
             text-align: center;
         }
-        .pager a.on {
-            font-weight: bold;
-            color: red;
-        }
     </style>
 </head>
 <body>
@@ -50,7 +46,7 @@
                     <option th:selected="${#strings.equals(param.searchType, 'userName')}" value="userName">이름</option>
                     <option th:selected="${#strings.equals(param.searchType, 'phone')}" value="phone">연락처</option>
                 </select>
-                <input th:value="${param.searchValue}" type="sear" name="searchValue" placeholder="검색어 입력"/>
+                <input th:value="${param.searchValue}" type="search" name="searchValue" placeholder="검색어 입력"/>
                 <button type="submit">검색</button>
             </form>
        </div>
@@ -77,10 +73,13 @@
                     <th>
                         관리자여부
                     </th>
+                    <th>
+                        마지막 로그인
+                    </th>
                 </tr>
             </thead>
             <tbody>
-            <tr th:each="x : ${list}">
+                <tr th:each="x : ${list}">
                     <td th:text="${x.seq}">1</td>
                     <td>
                         <a th:text="${x.userId}"
@@ -100,6 +99,10 @@
                         <p th:if="${x.adminYn}">Y</p>
                         <p th:if="${x.adminYn eq false}">N</p>
                     </td>
+                    <td>
+                        <p th:text="${x.lastLoginDtText}"></p>
+                    </td>
+
                 </tr>
             </tbody>
         </table>

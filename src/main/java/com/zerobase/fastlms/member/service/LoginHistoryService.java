@@ -9,4 +9,6 @@ public interface LoginHistoryService {
     void saveLoginHistory(String userId, String ip, String userAgent);
 
     List<LoginHistoryDto>  getUserLoginHistory(String userId);
+
+    LoginHistoryDto getLatestLoginHistory(String userId);
 }

@@ -40,6 +40,12 @@ public class MemberDto extends DateTimeFormatter{
     long totalCount;
     long seq;
 
+    private LocalDateTime LastLoginDt;
+
+    public String getLastLoginDtText() {
+        return dateTimeToString(LastLoginDt);
+    }
+
     public String getRegDtText() {
         return dateTimeToString(regDt);
     }
