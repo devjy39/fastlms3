@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 화면 </title>
+    <style>
+        .detail table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .detail table th, .detail table td {
+            border:solid 1px #000;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .buttons a, .buttons button {
+            border-width: 0;
+            background-color: transparent;
+            text-decoration: underline;
+            font-size: 14px;
+            line-height: 20px;
+            height: 20px;
+            color: #000;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+<div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
+<h1>배너 관리 - 새 배너 추가 </h1>
+
+<div class="detail">
+
+    <form id="submitForm" method="post" enctype="multipart/form-data">
+
+        <table>
+            <tbody>
+            <tr>
+                <th>배너 타이틀</th>
+                <td>
+                    <input type="text" name="title" required placeholder="배너 타이틀" />
+                </td>
+            </tr>
+            <tr>
+                <th>내용 글귀</th>
+                <td>
+                    <textarea name="content" required placeholder="배너 컨텐츠 내용"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <th>링크 주소</th>
+                <td>
+                    <input type="url" name="moveUrl" required placeholder="링크 주소 입력" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>클릭 시 새 창 여부</th>
+                <td>
+                    <label>
+                        <input type="checkbox" name="newWindowYn" />
+                        새 창에서 열림
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <th>사용여부</th>
+                <td>
+                    <label>
+                        <input type="checkbox" name="usingYn" />
+                        사용
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    정렬 값
+                </th>
+                <td>
+                    <input type="number" name="sortValue" required placeholder="숫자만 입력하세요." />
+                </td>
+            </tr>
+
+            <tr>
+                <th>배너 이미지</th>
+                <td>
+                    <input type="file" name="file" required/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="buttons">
+            <button type="submit"> 배너 등록 하기 </button>
+            <a href="/admin/banner/list.do"> 목록 이동 </a>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

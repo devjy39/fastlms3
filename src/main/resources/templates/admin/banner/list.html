@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 화면 </title>
+    <style>
+        .list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .list table th, .list table td {
+            border:solid 1px #000;
+        }
+
+        p.nothing {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .list  .buttons a,.list  .buttons button {
+            border-width: 0;
+            background-color: transparent;
+            text-decoration: underline;
+            font-size: 14px;
+            line-height: 20px;
+            height: 20px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .num {
+            width: 5%;
+        }
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('form[name=deleteForm]').on('submit', function () {
+                if (!confirm(' 배너를 삭제하시겠습니까? ')) {
+                    return false;
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
+    <h1>배너 관리</h1>
+
+<div class="list">
+
+    <div>
+        <a href="/admin/banner/add.do"> 배너 등록 </a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th class="num"> NO </th>
+            <th class="num"> Sort value </th>
+            <th>TITLE</th>
+            <th>등록일</th>
+            <th>사용 여부</th>
+            <th>비고</th>
+        </tr>
+        </thead>
+        <tbody id="dataLIst">
+        <tr th:each="x, i : ${list}">
+            <td th:text="${i.count}">1</td>
+            <td th:text="${x.sortValue}">99</td>
+            <td>
+                <p>
+                    <a th:href="'edit.do?bannerId=' + ${x.id}" th:text="${x.title}">배너명</a>
+                </p>
+            </td>
+            <td>
+                <p th:text="${x.regDtText}">2021.01.01</p>
+            </td>
+            <td>
+                <p th:if="${x.usingYn}"><span>사용</span></p>
+                <p th:if="${x.usingYn == false}"><span>미사용</span></p>
+            </td>
+            <td>
+                <form name="deleteForm" method="post" action="/admin/banner/delete.do">
+                    <input type="hidden" name="id" th:value="${x.id}"/>
+                    <button type="submit">삭제</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${list.size() < 1}">
+            <td colspan="6" >
+                <p class="nothing">내용이 없습니다.</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>
